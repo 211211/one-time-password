@@ -4,7 +4,7 @@ import serviceAccount from './service_account'
 const createUser = require('./create_user')
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(JSON.parse(JSON.stringify(serviceAccount))),
   databaseURL: "https://one-time-password-b0338.firebaseio.com"
 });
 
