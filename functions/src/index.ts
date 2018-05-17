@@ -1,12 +1,11 @@
+import admin = require('firebase-admin')
 import * as functions from 'firebase-functions';
+import serviceAccount from './service_account'
+const createUser = require('./create_user')
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-export const helloWorld = functions.https.onRequest((request, response) => {
-  response.send("Hello from Firebase!");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://one-time-password-b0338.firebaseio.com"
 });
 
-export const goodBye = functions.https.onRequest((request, response) => {
-  response.send("Goodbye!");
-});
+exports.createUser = functions.https.onRequest(createUser)
